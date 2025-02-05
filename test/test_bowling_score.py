@@ -29,14 +29,12 @@ def test_symbol_zero():
     assert card.get_score() == total
 
 
-# def test_spare_not_extra():
-#     # test spare not extra
-#     automata = Automaton()
-#     pins = "9-3/613/815/-/8-7/8-"
-#     total = 121
-#     score_card = ScoreCard(pins)
-#     automata.set_input(score_card)
-#     assert automata.output() == total
+def test_spare_not_extra():
+    # test spare not extra
+    PINS = "9-3/613/815/-/8-7/8-"
+    total = 121
+    card = ScoreCard(PINS)
+    assert card.get_score() == total
 
 
 # def test_strike():
