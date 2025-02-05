@@ -11,26 +11,22 @@ def test_exist_score_card():
 def test_hitting_pins_regular():
     # Hitting pins total = 60
     PINS = "12345123451234512345"
-    card = ScoreCard(PINS)
     total = 60
+    card = ScoreCard(PINS)
     assert card.get_score() == total
 
 
-# def test_symbol_zero():
-#     # test symbol -
-#     automata = Automaton()
-#     pins = "9-9-9-9-9-9-9-9-9-9-"
-#     total = 90
-#     score_card = ScoreCard(pins)
-#     automata.set_input(score_card)
-#     assert automata.output() == total
+def test_symbol_zero():
+    # test symbol -
+    PINS = "9-9-9-9-9-9-9-9-9-9-"
+    total = 90
+    card = ScoreCard(PINS)
+    assert card.get_score() == total
 
-#     automata = Automaton()
-#     pins = "9-3561368153258-7181"
-#     total = 82
-#     score_card = ScoreCard(pins)
-#     automata.set_input(score_card)
-#     assert automata.output() == total
+    PINS = "9-3561368153258-7181"
+    total = 82
+    card = ScoreCard(PINS)
+    assert card.get_score() == total
 
 
 # def test_spare_not_extra():
