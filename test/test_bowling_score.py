@@ -37,21 +37,17 @@ def test_spare_not_extra():
     assert card.get_score() == total
 
 
-# def test_strike():
-#     # test strike
-#     automata = Automaton()
-#     pins = "X9-9-9-9-9-9-9-9-9-"
-#     total = 100
-#     score_card = ScoreCard(pins)
-#     automata.set_input(score_card)
-#     assert automata.output() == total
+def test_strike():
+    # test strike
+    PINS = "X9-9-9-9-9-9-9-9-9-"
+    total = 100
+    card = ScoreCard(PINS)
+    assert card.get_score() == total
 
-#     automata = Automaton()
-#     pins = "X9-X9-9-9-9-9-9-9-"
-#     total = 110
-#     score_card = ScoreCard(pins)
-#     automata.set_input(score_card)
-#     assert automata.output() == total
+    PINS = "X9-X9-9-9-9-9-9-9-"
+    total = 110
+    card = ScoreCard(PINS)
+    assert card.get_score() == total
 
 
 # def test_two_strikes():

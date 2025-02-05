@@ -11,15 +11,24 @@ class ScoreCard:
     
     def __calculate_spare(self):
         pins = self.__change_to_zero()
-        for position in range(len(pins)):
+        for position in range(len(pins) - 1):
             if pins[position] == '/':
                 self.score += ScoreCard.MAX_PINS - int(pins[position - 1]) + int(pins[position + 1])
         self.pins = pins.replace('/', '')
+        return self.score
+    
+    def __calculate_strike(self):
+        pins = self.__change_to_zero()
+        for position in range(len(pins) - 1):
+            if pins[position] == 'X':
+                self.score += ScoreCard.MAX_PINS + int(pins[position + 1]) + int(pins[position + 2])
+        self.pins = pins.replace('X', '')
         return self.score
 
     def get_score(self):
         self.pins = self.__change_to_zero()
         self.score = self.__calculate_spare()
+        self.score = self.__calculate_strike()
         for pin in self.pins:
             self.score += int(pin)
         return self.score
