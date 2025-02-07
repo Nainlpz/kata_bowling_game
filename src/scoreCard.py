@@ -27,8 +27,11 @@ class ScoreCard:
             if self.pins[position] == '10':
                 self.pins[position] = ScoreCard.MAX_PINS + int(self.pins[position + 1]) + int(self.pins[position + 2])
             position += 1
+        if len(self.pins) > 20:
+            return self.pins[:20]
         return self.pins
 
     def get_score(self):
         self.pins = self.__change_to_zero() and self.__calculate_spare() and self.__calculate_strike()
+        print(self.pins)
         return sum(int(pin) for pin in self.pins)
