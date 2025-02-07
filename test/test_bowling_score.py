@@ -50,14 +50,12 @@ def test_strike():
     assert card.get_score() == total
 
 
-# def test_two_strikes():
-#     # two strikes in a row is a double
-#     automata = Automaton()
-#     pins = "XX9-9-9-9-9-9-9-9-"
-#     total = 120
-#     score_card = ScoreCard(pins)
-#     automata.set_input(score_card)
-#     assert automata.output() == total
+def test_two_strikes():
+    # two strikes in a row is a double
+    PINS = "XX9-9-9-9-9-9-9-9-"
+    total = 120
+    card = ScoreCard(PINS)
+    assert card.get_score() == total
 
 
 # def test_three_strikes():

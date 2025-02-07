@@ -3,32 +3,32 @@ class ScoreCard:
     MAX_PINS = 10
 
     def __init__(self, pins):
-        self.pins = pins
+        self.pins = list(pins)
         self.score = 0
 
     def __change_to_zero(self):
-        return self.pins.replace('-', '0')
+        self.pins = [0 if pin == "-" else pin for pin in self.pins]
+        return self.pins
     
     def __calculate_spare(self):
-        pins = self.__change_to_zero()
-        for position in range(len(pins) - 1):
-            if pins[position] == '/':
-                self.score += ScoreCard.MAX_PINS - int(pins[position - 1]) + int(pins[position + 1])
-        self.pins = pins.replace('/', '')
-        return self.score
+        self.pins = self.__change_to_zero()
+        position = 0
+        while position < len(self.pins) - 1:
+            if self.pins[position] == '/':
+                self.pins[position] = ScoreCard.MAX_PINS - int(self.pins[position - 1]) + int(self.pins[position + 1])
+            position += 1
+        return self.pins
     
     def __calculate_strike(self):
-        pins = self.__change_to_zero()
-        for position in range(len(pins) - 1):
-            if pins[position] == 'X':
-                self.score += ScoreCard.MAX_PINS + int(pins[position + 1]) + int(pins[position + 2])
-        self.pins = pins.replace('X', '')
-        return self.score
+        self.pins = self.__change_to_zero()
+        self.pins = ['10' if pin == "X" else pin for pin in self.pins]
+        position = 0
+        while position < len(self.pins) - 1:
+            if self.pins[position] == '10':
+                self.pins[position] = ScoreCard.MAX_PINS + int(self.pins[position + 1]) + int(self.pins[position + 2])
+            position += 1
+        return self.pins
 
     def get_score(self):
-        self.pins = self.__change_to_zero()
-        self.score = self.__calculate_spare()
-        self.score = self.__calculate_strike()
-        for pin in self.pins:
-            self.score += int(pin)
-        return self.score
+        self.pins = self.__change_to_zero() and self.__calculate_spare() and self.__calculate_strike()
+        return sum(int(pin) for pin in self.pins)
